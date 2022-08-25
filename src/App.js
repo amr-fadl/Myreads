@@ -82,8 +82,7 @@ function App() {
                         // alldata.map(el => console.log(el.id == item.id ? el.shelf : ''))
 
                        
-                        let amr = alldata.filter(el => el.id == item.id).map(e => e.shelf)
-                        // console.log(amr != '' ? amr : 'none');
+                        let filterData = alldata.filter(el => el.id == item.id).map(e => e.shelf)
                         return <li key={item.id}>
                             <div className="book">
                             <div className="book-top">
@@ -96,7 +95,7 @@ function App() {
                                 }}
                                 ></div>
                                 <div className="book-shelf-changer">
-                                <select onChange={e => updateShalfe(item , e.target.value)} value={`${amr != '' ? amr : 'none'}`}>
+                                <select onChange={e => updateShalfe(item , e.target.value)} value={`${filterData != '' ? filterData : 'none'}`}>
                                     <option value="none">None</option>
                                     <option value="currentlyReading">
                                     Currently Reading
