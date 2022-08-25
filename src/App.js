@@ -12,6 +12,9 @@ function App() {
 
 
   const [alldata , setAlldata] = useState([])
+  const [changeShelf , setChangeShelf] = useState('')
+
+
   useEffect( () => {
     getAll().then(e => {
       setAlldata(e)
@@ -22,8 +25,7 @@ function App() {
   // update Shalfe
   const updateShalfe = (book , val) => {
     update(book , val)
-
-    console.log(book);
+    setChangeShelf(alldata)
   }
 
   // handle Search Data
@@ -76,6 +78,12 @@ function App() {
                 <ol className="books-grid">
                     {SearchData != ''&&
                       SearchData.map( item => {
+                        // alldata.filter(e => e.id == item.id).map(el => console.log(item))
+                        // alldata.map(el => console.log(el.id == item.id ? el.shelf : ''))
+
+                       
+                        let amr = alldata.filter(el => el.id == item.id).map(e => e.shelf)
+                        // console.log(amr != '' ? amr : 'none');
                         return <li key={item.id}>
                             <div className="book">
                             <div className="book-top">
@@ -88,16 +96,13 @@ function App() {
                                 }}
                                 ></div>
                                 <div className="book-shelf-changer">
-                                <select onChange={e => updateShalfe(item , e.target.value)} value={'none'}>
-                                    <option value="none" disabled>
-                                    Move to...
-                                    </option>
+                                <select onChange={e => updateShalfe(item , e.target.value)} value={`${amr != '' ? amr : 'none'}`}>
+                                    <option value="none">None</option>
                                     <option value="currentlyReading">
                                     Currently Reading
                                     </option>
                                     <option value="wantToRead">Want to Read</option>
                                     <option value="read">Read</option>
-                                    <option value="none">None</option>
                                 </select>
                                 </div>
                             </div>
